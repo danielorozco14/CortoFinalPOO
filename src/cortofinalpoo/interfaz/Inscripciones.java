@@ -31,7 +31,7 @@ import modelo.Filtro;
 public class Inscripciones extends JFrame {
 
     public JLabel lblNumeroInscripcion, lblNombre, lblEdad, lblPropietario,lblRaza,lblEstado;
-    public JTextField numInscripcion, nombre, edad,propietario,raza;
+    public JTextField numInscripcion, nombre, edad,propietario;
     public JComboBox tipoRaza;
 
     ButtonGroup existencia = new ButtonGroup();
@@ -67,8 +67,9 @@ public class Inscripciones extends JFrame {
         container.add(numInscripcion);
         container.add(tipoRaza);
         container.add(propietario);
-        container.add(raza);
+        container.add(nombre);
         container.add(edad);
+        
         //CHECKBOX
         container.add(si);
         container.add(no);
@@ -106,7 +107,7 @@ public class Inscripciones extends JFrame {
         numInscripcion = new JTextField();
         tipoRaza = new JComboBox();
         edad = new JTextField();
-        raza=new JTextField();
+        nombre=new JTextField();
         propietario= new JTextField();
         si = new JRadioButton("si", true);
         no = new JRadioButton("no");
@@ -129,8 +130,8 @@ public class Inscripciones extends JFrame {
         
         //TAMAÑO Y LUGAR DE LOS TEXTFIELDS
         numInscripcion.setBounds(140, 10, ANCHOC, ALTOC);
-        tipoRaza.setBounds(140, 60, ANCHOC, ALTOC);
-        raza.setBounds(140,140,ANCHOC,ALTOC);
+        tipoRaza.setBounds(140,140,ANCHOC,ALTOC);
+        nombre.setBounds(140, 60, ANCHOC, ALTOC);
         propietario.setBounds(500, 60, ANCHOC, ALTOC);
         edad.setBounds(140, 100, 80, ALTOC);
         si.setBounds(140, 180, 50, ALTOC);
@@ -184,7 +185,7 @@ public class Inscripciones extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 FiltroDao fd = new FiltroDao();
                 
-                Filtro f= new Filtro(numInscripcion.getText(), Integer.parseInt(edad.getText()), tipoRaza.getSelectedItem().toString(), true);
+                Filtro    f=new Filtro(nombre.getText(), Integer.parseInt(edad.getText()), propietario.getText(), numInscripcion.getText(), tipoRaza.getSelectedItem().toString(), true);
                 if (no.isSelected()) {
                     f.setExistencia(false);
                 }
@@ -203,7 +204,7 @@ public class Inscripciones extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f= new Filtro(numInscripcion.getText(), Integer.parseInt(edad.getText()), tipoRaza.getSelectedItem().toString(), true);
+                Filtro    f=new Filtro(nombre.getText(), Integer.parseInt(edad.getText()), propietario.getText(), numInscripcion.getText(), tipoRaza.getSelectedItem().toString(), true);
                 if (no.isSelected()) {
                     f.setExistencia(false);
                 }
