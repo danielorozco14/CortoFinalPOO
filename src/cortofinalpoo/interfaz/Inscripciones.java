@@ -30,9 +30,9 @@ import modelo.Filtro;
  */
 public class Inscripciones extends JFrame {
 
-    public JLabel lblNumeroInscripcion, lblNombre, lblEdad, lblPropietario,lblRaza;
-    public JTextField numInscripcion, nombre, edad,propietario;
-    public JComboBox marca;
+    public JLabel lblNumeroInscripcion, lblNombre, lblEdad, lblPropietario,lblRaza,lblEstado;
+    public JTextField numInscripcion, nombre, edad,propietario,raza;
+    public JComboBox tipoRaza;
 
     ButtonGroup existencia = new ButtonGroup();
     public JRadioButton no;
@@ -47,29 +47,39 @@ public class Inscripciones extends JFrame {
     DefaultTableModel tm;
 
     public Inscripciones() {
-        super("Inventario");
+        super("Inscripción");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         agregarLabels();
         formulario();
         llenarTabla();
         Container container = getContentPane();
+        
+        //AGREGANDO TODOS LOS COMPONENTES A LA PANTALLA
+        //LABELS
         container.add(lblNumeroInscripcion);
         container.add(lblNombre);
         container.add(lblEdad);
         container.add(lblPropietario);
+        container.add(lblRaza);
+        container.add(lblEstado);
+        //JTEXTFIELDS
         container.add(numInscripcion);
-        container.add(marca);
+        container.add(tipoRaza);
         container.add(propietario);
+        container.add(raza);
         container.add(edad);
+        //CHECKBOX
         container.add(si);
         container.add(no);
+        //JBUTTONS
         container.add(buscar);
         container.add(insertar);
         container.add(actualizar);
         container.add(eliminar);
         container.add(limpiar);
         container.add(table);
+        
         setSize(900, 600);
         eventos();
     }
@@ -79,19 +89,24 @@ public class Inscripciones extends JFrame {
         lblNombre = new JLabel("Nombre");
         lblEdad = new JLabel("Edad");
         lblPropietario = new JLabel("Propietario");
+        lblRaza=new JLabel("Raza");
+        lblEstado=new JLabel("Estado");
 
         lblNumeroInscripcion.setBounds(10, 10, ANCHOC, ALTOC);
         lblNombre.setBounds(10, 60, ANCHOC, ALTOC);
         lblEdad.setBounds(10, 100, ANCHOC, ALTOC);
         lblPropietario.setBounds(400, 60, ANCHOC, ALTOC);
+        lblRaza.setBounds(10,140, ANCHOC, ALTOC);
+        lblEstado.setBounds(10, 180, ANCHOC, ALTOC);
 
     }
 
     public final void formulario() {
         //CREACION DE TEXT FIELDS
         numInscripcion = new JTextField();
-        marca = new JComboBox();
+        tipoRaza = new JComboBox();
         edad = new JTextField();
+        raza=new JTextField();
         propietario= new JTextField();
         si = new JRadioButton("si", true);
         no = new JRadioButton("no");
@@ -103,10 +118,10 @@ public class Inscripciones extends JFrame {
         limpiar = new JButton("Limpiar");
 
         table = new JPanel();
-        marca.addItem("FRAM");
-        marca.addItem("WIX");
-        marca.addItem("Luber Finer");
-        marca.addItem("OSK");
+        tipoRaza.addItem("Pitbull");
+        tipoRaza.addItem("Pastor Aleman");
+        tipoRaza.addItem("Gran Danes");
+        tipoRaza.addItem("Dalmata");
 
         existencia = new ButtonGroup();
         existencia.add(si);
@@ -114,11 +129,12 @@ public class Inscripciones extends JFrame {
         
         //TAMAÑO Y LUGAR DE LOS TEXTFIELDS
         numInscripcion.setBounds(140, 10, ANCHOC, ALTOC);
-        marca.setBounds(140, 60, ANCHOC, ALTOC);
+        tipoRaza.setBounds(140, 60, ANCHOC, ALTOC);
+        raza.setBounds(140,140,ANCHOC,ALTOC);
         propietario.setBounds(500, 60, ANCHOC, ALTOC);
         edad.setBounds(140, 100, 80, ALTOC);
-        si.setBounds(140, 140, 50, ALTOC);
-        no.setBounds(210, 140, 50, ALTOC);
+        si.setBounds(140, 180, 50, ALTOC);
+        no.setBounds(210, 180, 50, ALTOC);
 
         //TAMAÑO Y LUGAR DE LOS BOTONES 
         buscar.setBounds(350, 10, 100, ALTOC);
@@ -165,7 +181,7 @@ public class Inscripciones extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(numInscripcion.getText(), marca.getSelectedItem().toString(),
+                Filtro f = new Filtro(numInscripcion.getText(), tipoRaza.getSelectedItem().toString(),
                         Integer.parseInt(edad.getText()), true);
                 if (no.isSelected()) {
                     f.setExistencia(false);
@@ -185,7 +201,7 @@ public class Inscripciones extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(numInscripcion.getText(), marca.getSelectedItem().toString(), Integer.parseInt(edad.getText()), true);
+                Filtro f = new Filtro(numInscripcion.getText(), tipoRaza.getSelectedItem().toString(), Integer.parseInt(edad.getText()), true);
                 if (no.isSelected()) {
                     f.setExistencia(false);
                 }
@@ -222,7 +238,7 @@ public class Inscripciones extends JFrame {
                     JOptionPane.showMessageDialog(null, "Filtro buscado no se ha encontrado");
                 } else {
                     numInscripcion.setText(f.getCodigo());
-                    marca.setSelectedItem(f.getMarca());
+                    tipoRaza.setSelectedItem(f.getMarca());
                     edad.setText(Integer.toString(f.getStock()));
 
                     if (f.getExistencia()) {
@@ -244,7 +260,7 @@ public class Inscripciones extends JFrame {
     
     public void limpiarCampos() {
         numInscripcion.setText("");
-        marca.setSelectedItem("");
+        tipoRaza.setSelectedItem("");
         edad.setText("");
     }
     
