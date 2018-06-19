@@ -11,36 +11,37 @@ package modelo;
  */
 public class Filtro {
     private int id;
-    private String codigo;
-    private String marca;
-    private int stock;
+    private String nombre;
+    private String propietario;
+    private int edad;    
+    private String numInscripcion;
     private boolean existencia;
     
     public Filtro(){
     }
     
-    public Filtro(int id,String codigo, String marca, int stock, boolean existencia)
+    public Filtro(int id,String nombre, int edad, String propietario, boolean existencia)
     {
         this.id=id;
-        this.marca=marca;
-        this.stock=stock;
+        this.edad=edad;
+        this.propietario=propietario;
         this.existencia=existencia;
-        this.codigo=codigo;
+        this.nombre=nombre;
     }
     
-    public Filtro(String codigo, String marca, int stock, boolean existencia){
-        this.codigo=codigo;
-        this.marca=marca;
-        this.stock=stock;
+    public Filtro(String codigo, int edad, String propietario, boolean existencia){
+        this.nombre=codigo;
+        this.edad=edad;
+        this.propietario=propietario;
         this.existencia=existencia;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getNombre() {
+        return nombre;
     }
     
-    public void setCodigo(String codigo){
-        this.codigo=codigo;
+    public void setNombre(String nombre){
+        this.nombre=nombre;
     }
 
     public int getId() {
@@ -51,20 +52,20 @@ public class Filtro {
         this.id = id;
     }
 
-    public String getMarca() {
-        return marca;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    public int getStock() {
-        return stock;
+    public String getPropietario() {
+        return propietario;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
     }
 
     public boolean getExistencia() {

@@ -142,8 +142,9 @@ public class Inscripciones extends JFrame {
         actualizar.setBounds(150, 210, ANCHOC, ALTOC);
         eliminar.setBounds(300, 210, ANCHOC, ALTOC);
         limpiar.setBounds(450, 210, ANCHOC, ALTOC);
+        //JTABLE
         resultados = new JTable();
-        table.setBounds(10, 250, 500, 200);
+        table.setBounds(100, 250, 600, 200);
         table.add(new JScrollPane(resultados));
     }
 
@@ -162,16 +163,17 @@ public class Inscripciones extends JFrame {
                 }
             }
         };
-        tm.addColumn("Codigo");
-        tm.addColumn("Marca");
-        tm.addColumn("Stock");
-        tm.addColumn("Stock en Sucursal");
+        tm.addColumn("N° Inscripcion");
+        tm.addColumn("Nombre");
+        tm.addColumn("Propietario");
+        tm.addColumn("Raza");
+        tm.addColumn("Estado");
 
         FiltroDao fd = new FiltroDao();
         ArrayList<Filtro> filtros = fd.readAll();
 
         for (Filtro fi : filtros) {
-            tm.addRow(new Object[]{fi.getCodigo(), fi.getMarca(), fi.getStock(), fi.getExistencia()});
+            tm.addRow(new Object[]{fi.getNombre(), fi.getPropietario(), fi.getEdad(), fi.getExistencia()});
         }
         resultados.setModel(tm);
     }
@@ -181,8 +183,8 @@ public class Inscripciones extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(numInscripcion.getText(), tipoRaza.getSelectedItem().toString(),
-                        Integer.parseInt(edad.getText()), true);
+                
+                Filtro f= new Filtro(numInscripcion.getText(), Integer.parseInt(edad.getText()), tipoRaza.getSelectedItem().toString(), true);
                 if (no.isSelected()) {
                     f.setExistencia(false);
                 }
@@ -201,7 +203,7 @@ public class Inscripciones extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(numInscripcion.getText(), tipoRaza.getSelectedItem().toString(), Integer.parseInt(edad.getText()), true);
+                Filtro f= new Filtro(numInscripcion.getText(), Integer.parseInt(edad.getText()), tipoRaza.getSelectedItem().toString(), true);
                 if (no.isSelected()) {
                     f.setExistencia(false);
                 }
@@ -237,9 +239,9 @@ public class Inscripciones extends JFrame {
                 if (f == null) {
                     JOptionPane.showMessageDialog(null, "Filtro buscado no se ha encontrado");
                 } else {
-                    numInscripcion.setText(f.getCodigo());
-                    tipoRaza.setSelectedItem(f.getMarca());
-                    edad.setText(Integer.toString(f.getStock()));
+                    numInscripcion.setText(f.getNombre());
+                    tipoRaza.setSelectedItem(f.getPropietario());
+                    edad.setText(Integer.toString(f.getEdad()));
 
                     if (f.getExistencia()) {
                         si.setSelected(true);

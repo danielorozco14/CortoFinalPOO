@@ -38,7 +38,7 @@ public class Conexion {
         try {
             Class.forName(this.driver);
             cnx = (Connection) DriverManager.getConnection(this.url, this.user, this.pass);
-
+          
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +48,7 @@ public class Conexion {
         user = "root";
         pass = "";
         driver = "com.mysql.jdbc.Driver";
-        url = "jdbc:mysql://localhost/filtros";
+        url = "jdbc:mysql://localhost/doglove";
     }
 
     public Connection getCnx() {

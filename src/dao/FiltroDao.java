@@ -16,26 +16,27 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Filtro;
-
+//marca es nombre
+//stock es edad 
 /**
  *
  * @author LN710Q
  */
 public class FiltroDao implements metodos<Filtro> {
-    private static final String SQL_INSERT="INSERT INTO filtros_aceite(codFiltro,marca,stock,existencia)VALUES(?,?,?,?)";
-    private static final String SQL_UPDATE="UPDATE filtros_aceite SET marca=?,stock=?,existencia=? WHERE codFiltro=?";
-    private static final String SQL_DELETE="DELETE FROM filtros_aceite WHERE codFiltro=?";
-    private static final String SQL_READ="SELECT * FROM filtros_aceite WHERE codFiltro=?";
-    private static final String SQL_READALL="SELECT * FROM filtros_aceite";
+    private static final String SQL_INSERT="INSERT INTO mascotas(numInscripcion,nombre,propietario,edad,raza,existencia)VALUES(?,?,?,?)";
+    private static final String SQL_UPDATE="UPDATE mascotas SET nombre=?,edad=?,existencia=? WHERE numInscripcion=?";
+    private static final String SQL_DELETE="DELETE FROM mascotas WHERE numInscripcion=?";
+    private static final String SQL_READ="SELECT * FROM mascotas WHERE numInscripcion=?";
+    private static final String SQL_READALL="SELECT * FROM mascotas";
     private static final Conexion con = Conexion.conectar();
     @Override
     public boolean create(Filtro g) {
         PreparedStatement ps;
         try{
             ps= con.getCnx().prepareStatement(SQL_INSERT);
-            ps.setString(1, g.getCodigo());
-            ps.setString(2, g.getMarca());
-            ps.setInt(3, g.getStock());
+            ps.setString(1, g.getNombre());
+            ps.setString(2, g.getPropietario());
+            ps.setInt(3, g.getEdad());
             ps.setBoolean(4, true);
             if(ps.executeUpdate()>0){
                 return true;
@@ -71,10 +72,10 @@ public class FiltroDao implements metodos<Filtro> {
     public boolean update(Filtro c) {
         PreparedStatement ps;
         try{
-            System.out.println(c.getCodigo());
+            System.out.println(c.getNombre());
             ps=con.getCnx().prepareStatement(SQL_UPDATE);
-            ps.setString(1, c.getMarca());
-            ps.setInt(2,c.getStock());
+            ps.setString(1, c.getPropietario());
+            ps.setInt(2,c.getEdad());
             ps.setBoolean(3,c.getExistencia());
             if(ps.executeUpdate()>0){
                 return true;
@@ -99,7 +100,7 @@ public class FiltroDao implements metodos<Filtro> {
             rs=ps.executeQuery();
             
             while(rs.next()){
-                f=new Filtro(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getBoolean(5));//POSIBLE ERROR EN PARAMETROS
+                f=new Filtro(rs.getInt(1), rs.getString(2),rs.getInt(3), rs.getString(4),rs.getBoolean(5));
             }
             rs.close();
         }catch(SQLException ex){
