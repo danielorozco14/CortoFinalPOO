@@ -34,10 +34,12 @@ public class FiltroDao implements metodos<Filtro> {
         PreparedStatement ps;
         try{
             ps= con.getCnx().prepareStatement(SQL_INSERT);
-            ps.setString(1, g.getNombre());
-            ps.setString(2, g.getPropietario());
-            ps.setInt(3, g.getEdad());
-            ps.setBoolean(4, true);
+            ps.setString(1,g.getNumInscripcion());
+            ps.setString(2, g.getNombre());
+            ps.setString(3, g.getPropietario());
+            ps.setInt(4,g.getEdad());
+            ps.setString(5, g.getRaza());
+            ps.setBoolean(6, true);
             if(ps.executeUpdate()>0){
                 return true;
             }            
@@ -100,7 +102,7 @@ public class FiltroDao implements metodos<Filtro> {
             rs=ps.executeQuery();
             
             while(rs.next()){
-                f=new Filtro(rs.getInt(1), rs.getString(2),rs.getInt(3), rs.getString(4),rs.getBoolean(5));
+                f=new Filtro(rs.getString(1), rs.getString(2),rs.getString(3), rs.getInt(4),rs.getString(5),rs.getBoolean(6));
             }
             rs.close();
         }catch(SQLException ex){
