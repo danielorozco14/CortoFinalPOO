@@ -41,6 +41,23 @@ public class Filtro {
         this.numInscripcion=numInscripcion;
     }
 
+    public String getNumInscripcion() {
+        return numInscripcion;
+    }
+
+    public void setNumInscripcion(String numInscripcion) {
+        this.numInscripcion = numInscripcion;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    
     public String getNombre() {
         return nombre;
     }
