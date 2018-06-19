@@ -21,20 +21,24 @@ public class Filtro {
     public Filtro(){
     }
     
-    public Filtro(int id,String nombre, int edad, String propietario, boolean existencia)
+    public Filtro(int id,String nombre, int edad, String propietario,String numInscripcion,String raza, boolean existencia)
     {
         this.id=id;
         this.edad=edad;
         this.propietario=propietario;
         this.existencia=existencia;
         this.nombre=nombre;
+        this.raza=raza;
+        this.numInscripcion=numInscripcion;
     }
     
-    public Filtro(String codigo, int edad, String propietario, boolean existencia){
-        this.nombre=codigo;
+    public Filtro(String nombre, int edad, String propietario,String numInscripcion,String raza, boolean existencia){
         this.edad=edad;
         this.propietario=propietario;
         this.existencia=existencia;
+        this.nombre=nombre;
+        this.raza=raza;
+        this.numInscripcion=numInscripcion;
     }
 
     public String getNombre() {
