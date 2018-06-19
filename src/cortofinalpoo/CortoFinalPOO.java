@@ -5,6 +5,8 @@
  */
 package cortofinalpoo;
 
+import cortofinalpoo.interfaz.Inscripciones;
+
 /**
  *
  * @author LN710Q
@@ -16,5 +18,6 @@ public class CortoFinalPOO {
      */
     public static void main(String[] args) {
     
+        new Inscripciones().setVisible(true);
     }    
 }
