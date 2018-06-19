@@ -16,6 +16,7 @@ public class Filtro {
     private int edad;    
     private String numInscripcion;
     private boolean existencia;
+    private String raza;
     
     public Filtro(){
     }
